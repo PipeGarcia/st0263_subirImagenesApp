@@ -13,7 +13,7 @@ var mongoose = require('mongoose');
 var multer = require('multer');
 var upload = multer({dest:'public/uploads/'});
 
-mongoose.connect('mongodb://localhost/subirImagenesDB');
+mongoose.connect('mongodb://pipe:hola@ds149201.mlab.com:49201/agarci45');
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
