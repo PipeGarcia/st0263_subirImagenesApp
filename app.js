@@ -13,6 +13,8 @@ var mongoose = require('mongoose');
 var multer = require('multer');
 var upload = multer({dest:'public/uploads/'});
 
+// ruta de mlab mongodb://pipe:hola@ds149201.mlab.com:49201/agarci45
+// ruta local mongodb://localhost/subirImagenesDB
 mongoose.connect('mongodb://pipe:hola@ds149201.mlab.com:49201/agarci45');
 var db = mongoose.connection;
 
@@ -24,7 +26,7 @@ var routesImages = require('./routes/images');
 var app = express();
 
 // Motor de las vistas
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'views')); //carpeta que se encarga de las vistas
 app.engine('handlebars', exphbs({defaultLayout:'layout'}));
 app.set('view engine', 'handlebars');
 
@@ -77,7 +79,6 @@ app.use('/', routes);
 app.use('/', users);
 app.use('/', routesImages);
 
-// Definir el puertoo
 app.set('port', (process.env.PORT || 3000));
 
 app.listen(app.get('port'), function(){

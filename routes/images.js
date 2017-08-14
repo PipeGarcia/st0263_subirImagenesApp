@@ -1,7 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-var upload = multer({dest:'public/uploads/'});
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+})
+
+var upload = multer({ storage: storage })
 
 var Image = require('../models/image');
 
@@ -20,17 +30,22 @@ router.post('/', upload.any(), function(req, res, next){
 	Image.saveImage(newImage, function(err, image){
 		if(err) throw err;
 		console.log(image);
-		});
+	});
 
 	console.log(req.user._id);
 	console.log(originalname);
-	res.send(req.files);
+
+	req.flash('success_msg', 'Imagen subida exitosamente!');
+	res.redirect('/');
 });
 
 router.get('/myImages', function(req, res){
 	res.render('myImages');
 });
 
+router.get('/imagesList', function(req, res){
+	res.render('imagesList');
+});
 
 router.post('/myImages', function(req, res){
 
@@ -40,32 +55,14 @@ router.post('/myImages', function(req, res){
 		for (var i = 0; i < images.length; i++) {
 			namesOfImages[i] = images[i].originalname;
 		}
-		console.log('nombre imagenes ' + JSON.stringify(namesOfImages));
-		res.send(namesOfImages);
-	});
-	
-	//res.redirect('/myImages');
-	
+		console.log('nombre imagenes ' + JSON.stringify(namesOfImages[0]));		
+		res.render('imagesList', {images: images});
+	});	
 });
 
 router.get('/deleteImage', function(req, res){
 	res.render('deleteImage');
 });
-
-
-/*router.post('/deleteImage', function(req, res){ //no se por que pongo el next
-	//res.send(req.user.password);
-	Image.removeImage(req.body.originalname, function(){
-		console.log('hasta aca llego');
-		return next();
-		
-   		
-   		
-   		//res.end();
-   		res.send('hola');
-   	});
-});*/
-
 
 router.post('/deleteImage', function(req, res){
 	Image.getImageByUserAndName(req.user.username, req.body.originalname, function(err, image){

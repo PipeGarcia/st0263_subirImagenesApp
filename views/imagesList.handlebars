@@ -1,0 +1,8 @@
+<h3 style="color:white">Imágenes</h3>
+{{#each images}}
+	<!-- {{@key}}: {{this.originalname}} -->
+	<p style="color:white">{{this.originalname}}</p>
+    <img src="./uploads/{{this.originalname}}">
+    <br><br>
+{{/each}}
+	

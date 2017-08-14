@@ -7,7 +7,7 @@ router.get('/', checkIfLogged, function(req, res){
 
 function checkIfLogged(req, res, next){
 	if(req.isAuthenticated()){
-		return next(); //manda a llamar al siguiente middleware
+		return next();
 	} else {		
 		res.redirect('/login');
 	}
