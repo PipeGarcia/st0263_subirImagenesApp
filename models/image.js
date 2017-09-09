@@ -34,7 +34,7 @@ module.exports.getImage = function(username, callback){
 module.exports.removeImage = function(originalname, callback){
 	Image.remove({ originalname: originalname }, function (err) {
   		if (err) return handleError(err);
-  		
+  		callback();
   		console.log('Muy bien campeón');
 	});
 }

@@ -1,3 +1,4 @@
+var compression = require('compression');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -24,6 +25,9 @@ var routesImages = require('./routes/images');
 
 // Inicar la aplicación
 var app = express();
+
+app.use(compression());
+
 
 // Motor de las vistas
 app.set('views', path.join(__dirname, 'views')); //carpeta que se encarga de las vistas

@@ -129,7 +129,7 @@ router.get('/settingsEliminar', function(req, res){
 router.post('/settingsEliminar', function(req, res){
 
 	User.comparePassword(req.user.username, req.body.password, function(err, isMatch){
-		console.log('ismatch------------------------------------- ' + isMatch)
+		console.log('ismatch------------------------------------- ' + isMatch);
    		if(err) throw err;
 
    		if(isMatch){

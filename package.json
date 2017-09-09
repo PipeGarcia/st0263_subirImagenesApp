@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "*",
+    "compression": "^1.7.0",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
     "express": "*",
@@ -22,6 +23,7 @@
     "mongodb": "*",
     "mongoose": "*",
     "multer": "^1.3.0",
+    "node-cache": "^4.1.1",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*"

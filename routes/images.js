@@ -15,12 +15,15 @@ var upload = multer({ storage: storage })
 
 var Image = require('../models/image');
 
-router.post('/', upload.any(), function(req, res, next){
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
+router.post('/', upload.any(), function(req, res, next){
+	var key = req.user.username + '-key';
 	var username = req.user.username;
 	var originalname = req.files[0].originalname;
 	var destination = req.files[0].destination;
-
+	var imagesArray = [];
 	var newImage = new Image({
 		username: username,
 		originalname: originalname,
@@ -30,6 +33,25 @@ router.post('/', upload.any(), function(req, res, next){
 	Image.saveImage(newImage, function(err, image){
 		if(err) throw err;
 		console.log(image);
+		myCache.get( key, function( err, value ){
+			if( !err ){
+				if(value == undefined){
+					myCache.set( key, image, function( err, success ){
+						if( !err && success ){
+			    			console.log( 'creo objeto de nueva imagen en cache' );
+			  			}	
+					}); 
+				}else{
+					imagesArray = value;	
+					imagesArray.push(image);
+  					myCache.set( key, imagesArray, function( err, success ){
+						if( !err && success ){
+			    			console.log( 'actualizó la cache con la nueva imagen' );
+			  			}	
+					}); 
+				}				
+			}
+		});
 	});
 
 	console.log(req.user._id);
@@ -47,17 +69,35 @@ router.get('/imagesList', function(req, res){
 	res.render('imagesList');
 });
 
-router.post('/myImages', function(req, res){
+router.get('/myImages1', function(req, res){
 
-	Image.getImage(req.user.username, function(err, images){
-		console.log(images);
+	var key = req.user.username + '-key';
+
+	myCache.get( key, function( err, value ){
+		if( !err ){
+			if(value == undefined){
+				Image.getImage(req.user.username, function(err, images){
+					myCache.set( key, images, function( err, success ){
+  						if( !err && success ){
+				    		console.log( 'no encontro la cache, pero la creo' );
+				    		res.render('imagesList', {images: images});
+				  		}
+					}); 
+				});
+			}else{
+  				console.log( 'encontro la cache' );
+  				res.render('imagesList', {images: value});
+			}				
+		}
+	});
+
+		/*console.log(images);
 		var namesOfImages = [];
 		for (var i = 0; i < images.length; i++) {
 			namesOfImages[i] = images[i].originalname;
 		}
-		console.log('nombre imagenes ' + JSON.stringify(namesOfImages[0]));		
-		res.render('imagesList', {images: images});
-	});	
+		console.log('nombre imagenes ' + JSON.stringify(namesOfImages[0]));*/		
+	
 });
 
 router.get('/deleteImage', function(req, res){
@@ -65,13 +105,32 @@ router.get('/deleteImage', function(req, res){
 });
 
 router.post('/deleteImage', function(req, res){
+	var imagesArray = [];
 	Image.getImageByUserAndName(req.user.username, req.body.originalname, function(err, image){
 		if(err) throw err;
 		console.log('<><><><><><>');
 		//console.log(image.length);
 		if(image){
 			Image.removeImage(req.body.originalname, function(){
-   				return next();
+				var key = req.user.username + '-key';
+				myCache.get( key, function( err, value ){
+					if( !err ){
+						if(value == undefined){
+							console.log('no encontro cache, entonces no hace nada');
+						}else{
+							var finalImages= [];
+							imagesArray = value;
+							finalImages = imagesArray.filter(function(image){
+								return image.originalname !== req.body.originalname; 	
+							});
+							myCache.set( key, finalImages, function( err, success ){
+	  							if( !err && success ){
+					    			console.log( 'elimino imagen de cache' );
+					  			}
+							}); 
+						}				
+					}
+				});
 			});
 			req.flash('success_msg', 'Imagen eliminada');
 			res.redirect('/deleteImage');
