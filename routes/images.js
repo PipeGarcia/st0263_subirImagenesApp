@@ -16,14 +16,13 @@ var upload = multer({ storage: storage })
 var Image = require('../models/image');
 
 const NodeCache = require( "node-cache" );
-const myCache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
+const myCache = new NodeCache({ stdTTL: 60});
 
 router.post('/', upload.any(), function(req, res, next){
 	var key = req.user.username + '-key';
 	var username = req.user.username;
 	var originalname = req.files[0].originalname;
 	var destination = req.files[0].destination;
-	var imagesArray = [];
 	var newImage = new Image({
 		username: username,
 		originalname: originalname,
@@ -33,25 +32,6 @@ router.post('/', upload.any(), function(req, res, next){
 	Image.saveImage(newImage, function(err, image){
 		if(err) throw err;
 		console.log(image);
-		myCache.get( key, function( err, value ){
-			if( !err ){
-				if(value == undefined){
-					myCache.set( key, image, function( err, success ){
-						if( !err && success ){
-			    			console.log( 'creo objeto de nueva imagen en cache' );
-			  			}	
-					}); 
-				}else{
-					imagesArray = value;	
-					imagesArray.push(image);
-  					myCache.set( key, imagesArray, function( err, success ){
-						if( !err && success ){
-			    			console.log( 'actualizó la cache con la nueva imagen' );
-			  			}	
-					}); 
-				}				
-			}
-		});
 	});
 
 	console.log(req.user._id);
