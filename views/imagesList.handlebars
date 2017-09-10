@@ -2,7 +2,12 @@
 {{#each images}}
 	<!-- {{@key}}: {{this.originalname}} -->
 	<p style="color:white">{{this.originalname}}</p>
-    <img src="./uploads/{{this.originalname}}">
+	<a href="./uploads/{{this.originalname}}" download>
+    <p>Descargar</p>
+  		<!--<img border="0" src="/images/myw3schoolsimage.jpg" alt="W3Schools" width="104" height="142">-->
+	</a>
+    <img src="./uploads/{{this.originalname}}" width="640" height="480">
+
     <br><br>
 {{/each}}
 	

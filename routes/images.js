@@ -7,7 +7,7 @@ var storage = multer.diskStorage({
     cb(null, 'public/uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname);
+    cb(null, (Math.floor(Math.random() * 10000) + 1) + file.originalname);
   }
 })
 
@@ -19,9 +19,10 @@ const NodeCache = require( "node-cache" );
 const myCache = new NodeCache({ stdTTL: 60});
 
 router.post('/', upload.any(), function(req, res, next){
+	console.log(req.files[0]);
 	var key = req.user.username + '-key';
 	var username = req.user.username;
-	var originalname = req.files[0].originalname;
+	var originalname = req.files[0].filename;
 	var destination = req.files[0].destination;
 	var newImage = new Image({
 		username: username,
@@ -57,12 +58,15 @@ router.get('/myImages1', function(req, res){
 		if( !err ){
 			if(value == undefined){
 				Image.getImage(req.user.username, function(err, images){
-					myCache.set( key, images, function( err, success ){
-  						if( !err && success ){
-				    		console.log( 'no encontro la cache, pero la creo' );
-				    		res.render('imagesList', {images: images});
-				  		}
-					}); 
+					if(images.length > 0) {
+						myCache.set( key, images, function( err, success ){
+  							if( !err && success ){
+				    			console.log( 'no encontro la cache, pero la creo' );
+				    			
+				  			}
+						}); 
+					}
+					res.render('imagesList', {images: images});
 				});
 			}else{
   				console.log( 'encontro la cache' );
