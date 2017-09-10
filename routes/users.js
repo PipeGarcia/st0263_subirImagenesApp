@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var User = require('../models/user');
 
@@ -74,6 +75,60 @@ passport.use(new LocalStrategy(
    	});
    });
   }));
+
+//Credenciales pruebaxperiat8
+/*	clientID: '937593570482-k5qb5rffvoueal2c84amomrqkhue3et5.apps.googleusercontent.com',
+	clientSecret: '7oxxFjYmdvNQehZQ4ARUNpbT',
+	callbackURL: "http://localhost:3006/auth/google/callback" */
+
+passport.use(new GoogleStrategy({
+    clientID: '32652853190-kgupu5a74ohvt6g6fagp84lksek7s0ns.apps.googleusercontent.com',
+    clientSecret: '5uZF6lLJFBuyRpVNxYaX08Pv',
+    callbackURL: "http://localhost:3006/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+  		process.nextTick(function(){
+	       	User.getUserByUsername(profile.id, function (err, user) {
+	       		console.log('oe llegue aqui');
+	         	//return done(err, user);
+
+	        	if(err)
+					return done(err);
+	    			if(user)
+	    				return done(null, user);
+	    			else {
+	    				var newUser = new User({
+							name: profile.displayName,
+							email: profile.emails[0].value,
+							username: profile.id
+							//password: ''
+						});
+
+
+						User.createUser(newUser, function(err, user){
+							if(err) throw err;
+							console.log(user);
+						});
+
+	    				console.log(profile);
+		    		}
+	    	});
+
+       	});
+  }
+));
+
+//Solicitar a Google los campos pasados en scope
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+//Redirigir después de autenticarse con Google
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { successRedirect:'/', failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
