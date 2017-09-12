@@ -2,11 +2,13 @@
 Tópicos Especiales en Telemática
 
 Realizado por: Andrés Felipe García Granados
+               Cristian David Suaza Cárdenas
+               Stiven Andrés Hurtado Loaiza
 
 # Descripción de la aplicación
 
-Aplicación web que permite gestionar imágenes, donde hay un CRUD básico tanto de usuarios como de las imágenes 
-(subir, eliminar, y buscar imagenes; crear, actualizar, eliminar usuarios).
+Aplicación web que permite gestionar imágenes, donde hay un CRUD tanto de usuarios como de las imágenes 
+(subir, eliminar, buscar y descargar imagenes; crear, actualizar, eliminar usuarios).
 
 # 1. Análisis
 
@@ -22,6 +24,8 @@ Aplicación web que permite gestionar imágenes, donde hay un CRUD básico tanto
   8. Subir imagen
   9. Buscar imagen por nombre con extensión (Ej: imagen.jpg)
   10. Eliminar imagen por nombre con extensión (Ej: imagen.jpg)
+  11. Autenticar usuario con Google
+  12. Descargar imágenes
   
 # 1.2 Definición de tecnología de desarrollo y despliegue
 
@@ -36,7 +40,9 @@ Aplicación web que permite gestionar imágenes, donde hay un CRUD básico tanto
 
   Se utiliza el patrón MVC, para la parte de autenticación de los usuarios se utilizó passport, lo cual ayudó 
   para el login y el logout. En cuanto a las imágenes, se utilizó multer, el cual facilita el proceso para subir 
-  archivos.
+  archivos. Además se utiliza passport-google-oauth para la autenticación con Google y por último se utiliza el
+  modulo de node "compression" para comprimir los assets y el módulo "node-cache" para la implementación de cache
+  con respecto a las imágenes.
   
 # 3. Diseño
 
