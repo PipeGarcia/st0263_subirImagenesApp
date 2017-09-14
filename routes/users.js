@@ -76,15 +76,16 @@ passport.use(new LocalStrategy(
    });
   }));
 
-//Credenciales pruebaxperiat8
-/*	clientID: '937593570482-k5qb5rffvoueal2c84amomrqkhue3et5.apps.googleusercontent.com',
-	clientSecret: '7oxxFjYmdvNQehZQ4ARUNpbT',
-	callbackURL: "http://localhost:3006/auth/google/callback" */
+//localhost
+/*clientID: '32652853190-kgupu5a74ohvt6g6fagp84lksek7s0ns.apps.googleusercontent.com',
+    clientSecret: '5uZF6lLJFBuyRpVNxYaX08Pv',
+    callbackURL: "http://localhost:3006/auth/google/callback"*/
+
 
 passport.use(new GoogleStrategy({
-    clientID: '32652853190-kgupu5a74ohvt6g6fagp84lksek7s0ns.apps.googleusercontent.com',
-    clientSecret: '5uZF6lLJFBuyRpVNxYaX08Pv',
-    callbackURL: "http://localhost:3006/auth/google/callback"
+    clientID: '1086499015685-p8vd7o7qhmv0futvrppjeu8a3ivvtd5t.apps.googleusercontent.com',
+    clientSecret: '3qI5--sqTHhVtbHvrprHMSGT',
+    callbackURL: "http://proyecto26.dis.eafit.edu.co/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
   		process.nextTick(function(){
