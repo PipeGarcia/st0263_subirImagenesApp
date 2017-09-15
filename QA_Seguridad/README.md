@@ -9,7 +9,7 @@ Se configuran los servicios de autenticación externa con Google Auth, se solici
 
 • Se solicita el certificado de seguridad en LetsEncrypt sobre un dominio existente con la herramienta cerbots (la cual estaba previamente instalada en el servidor), con lo cual se crean los archivos fullchain y privkey, los cuales se concatenan para que las peticiones realizadas por HTTPS, respondan correctamente.
 
-- el proceso para solicitar el certificado y concatenar los archivos, se realizan con los pasos alojados en el GitHub por el profesor Edwin Montoya
+- El proceso para solicitar el certificado y concatenar los archivos, se realizan con los pasos alojados en el GitHub por el profesor Edwin Montoya
 
 	https://github.com/edwinm67/st0263eafit/tree/master/qa-security
 
@@ -57,25 +57,25 @@ Se revisan los servicios activos del firewall de cada uno de los servidores:
 
 ![](public.PNG)
 
-	Podemos observar que este firewall tiene el servicio de ssh y los puertos 80 y 443 TCP permitidos en la zona pública, que son necesarios para conexiones HTTP y HTTPS	
+Podemos observar que este firewall tiene el servicio de ssh y los puertos 80 y 443 TCP permitidos en la zona pública, que son necesarios para conexiones HTTP y HTTPS	
 
 - Servidor HAPROXY privado
 
 ![](haproxy.PNG)
 	
-	Podemos observar que este firewall tiene los servicios de ssh, http, https y nfs permitidos en la zona pública, los cuales son requeridos para el funcionamiento del HAPROXY		
+Podemos observar que este firewall tiene los servicios de ssh, http, https y nfs permitidos en la zona pública, los cuales son requeridos para el funcionamiento del HAPROXY		
 
 - Servidor de Aplicación
 
 ![](app.PNG)
 
-	Podemos observar que este firewall tiene los servicios de ssh, https y los puertos 80, 3000, 3001, 3002, 3006 y 3009 TCP y UDP permitidos en la zona pública, los cuales fueron abiertos para las entregas del proyecto 1.	
+Podemos observar que este firewall tiene los servicios de ssh, https y los puertos 80, 3000, 3001, 3002, 3006 y 3009 TCP y UDP permitidos en la zona pública, los cuales fueron abiertos para las entregas del proyecto 1.	
 
 - Servidor de Archivos
 
 ![](nfs.PNG)
 
-	Podemos observar que este firewall tiene los servicios de ssh, https, rpc-bind, nfs, mountd y los puertos 2049 TCP y UDP permitidos en la zona pública, los cuales fueron abiertos para el correcto funcionamiento del NFS	
+Podemos observar que este firewall tiene los servicios de ssh, https, rpc-bind, nfs, mountd y los puertos 2049 TCP y UDP permitidos en la zona pública, los cuales fueron abiertos para el correcto funcionamiento del NFS	
 
 # Google Auth
 
