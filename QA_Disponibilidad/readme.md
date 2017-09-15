@@ -9,8 +9,11 @@ Se configura la herramienta HAPROXY como balanceador de carga y la herramienta d
 # HAPROXY:
 
 • Proxy inverso (permite que un browser con conexión a la VPN, pueda ingresar a los App Server 10.131.137.179 o 10.131.137.177).
+
 • Se utiliza el algoritmo source para disponibilidad en Failover (Un servidor responde a todas las peticiones, y si este se cae el otro se encarga de recibir las peticiones hasta que el App Server1 entre de nuevo en producción)
+
 • Permite recibir comunicaciones seguras (https) con un certificado auto firmado el cual se encuentra en la ruta /etc/ssl/private/mydomain.pem
+
 • Estadísticas de tiempo de estado de vida (UP o DOWN), las cuales se pueden ver en la ruta 
 	http://10.131.137.184/haproxy?stats
 	usuario admin y contraseña admin
@@ -78,7 +81,7 @@ backend http_app
     server  app1 10.131.137.179:80 check
     server  app2 10.131.137.177:80 check}
 
-- Para las estadisticas
+- Para las estadísticas
 
 defaults
     stats enable
@@ -93,6 +96,10 @@ defaults
 	$ sudo systemctl start haproxy
 
 	$ sudo systemctl start haproxy
+
+# NFS
+
+Se configura el FileServer con NFS server 10.131.137.194, y se crea una carpeta donde se comparten los recursos en los servidores de aplicación, en esta carpeta es donde se realizan los uploads de la app, las imágenes quedan almacenadas en el fileserver.
 
 # Instalación y configuración NFS Server
 
