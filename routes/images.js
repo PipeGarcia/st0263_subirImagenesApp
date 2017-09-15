@@ -73,15 +73,7 @@ router.get('/myImages1', function(req, res){
   				res.render('imagesList', {images: value});
 			}				
 		}
-	});
-
-		/*console.log(images);
-		var namesOfImages = [];
-		for (var i = 0; i < images.length; i++) {
-			namesOfImages[i] = images[i].originalname;
-		}
-		console.log('nombre imagenes ' + JSON.stringify(namesOfImages[0]));*/		
-	
+	});	
 });
 
 router.get('/deleteImage', function(req, res){
@@ -92,8 +84,7 @@ router.post('/deleteImage', function(req, res){
 	var imagesArray = [];
 	Image.getImageByUserAndName(req.user.username, req.body.originalname, function(err, image){
 		if(err) throw err;
-		console.log('<><><><><><>');
-		//console.log(image.length);
+		
 		if(image){
 			Image.removeImage(req.body.originalname, function(){
 				var key = req.user.username + '-key';
@@ -122,9 +113,7 @@ router.post('/deleteImage', function(req, res){
 			req.flash('error_msg', 'Imagen no encontrada');
 			res.redirect('/deleteImage');
 		}
-	});
-
-	
+	});	
 });
 
 module.exports = router;
