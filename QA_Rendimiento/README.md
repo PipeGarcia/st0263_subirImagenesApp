@@ -2,11 +2,11 @@
 
 Para mejorar el rendimiento de la aplicación, se implementó **compresión de assets** y **cache**. Se realizaron pruebas por medio de la herramienta [JMeter](http://jmeter.apache.org/) para 2 escenarios en 3 momentos diferentes.
 
-Para la compresión de assets se utilizó el módulo de node llamado **compression**, el cual comprime los cuerpos de respuesta para todas las peticiones. Las siguientes líneas de cógido se añaden en **app2.js**
+Para la compresión de assets se utilizó el módulo de node llamado [compression](https://github.com/expressjs/compression), el cual comprime los cuerpos de respuesta para todas las peticiones. Las siguientes líneas de cógido se añaden en **app2.js**
 
 ![](compression.PNG)
 
-Para la parte de cache se utilizó el módulo **node-cache** el cual crea una cache interna, es decir en el servidor que levanta la aplicación, pero actúa como memcached que es directamente la cache en memoria ram.
+Para la parte de cache se utilizó el módulo [node-cache](https://www.npmjs.com/package/node-cache) el cual crea una cache interna, es decir en el servidor que levanta la aplicación, pero actúa como memcached que es directamente la cache en memoria ram.
 
 La cache se implementó de la siguiente manera:
 
@@ -64,7 +64,7 @@ Igualmente para 450 usuarios buscando una imagen se observa una mejora en el **t
 
 Finalmente, se puede observar claramente como mejora la **latencia** cuando se realiza una búsqueda por medio de cache.
 
-* Ejemplo1: La primera vez que un usuario busca sus imágenes obtiene un tiempo de respuesta de 7990 ms; en esta primera búsqueda no está utilizando cache. Una vez realizada la primera búsqueda, se crea la cache, la cual se utiliza cuando el usuario vuelve a realizar una consulta de sus imágenes, en la cual se obtiene un tiempo de respuesta de 3568 ms.
+* Ejemplo1: La primera vez que un usuario busca sus imágenes obtiene una **latencia** de 7990 ms; en esta primera búsqueda no está utilizando cache. Una vez realizada la primera búsqueda, se crea la cache, la cual se utiliza cuando el usuario vuelve a realizar una consulta de sus imágenes, en la cual se obtiene una **latencia** de 3568 ms.
 
 ![](EjemploConCache1.PNG)
 

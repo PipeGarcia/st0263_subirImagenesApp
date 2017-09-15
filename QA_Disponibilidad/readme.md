@@ -6,6 +6,14 @@ Se configura la herramienta HAPROXY como balanceador de carga y la herramienta d
 
 ![](arquitectura.PNG)
 
+Direcciones ip:
+	* Dirección pública: proyecto26.dis.eafit.edu.co
+	* LB: 10.131.137.184
+	* App1: 10.131.137.179 --> Principal
+	* App2: 10.131.137.177
+	* File System: 10.131.137.194
+
+
 # HAPROXY:
 
 • Proxy inverso (permite que un browser con conexión a la VPN, pueda ingresar a los App Server 10.131.137.179 o 10.131.137.177).

@@ -79,7 +79,7 @@ Podemos observar que este firewall tiene los servicios de ssh, https, rpc-bind, 
 
 # Google Auth
 
-Para la autenticación con Google se utilizó el módulo **passport-google-oauth**, por medio del cual se solicita al usuario el permiso de utilizar la aplicación **Subir Imágenes App**.
+Para la autenticación con Google se utilizó el módulo [passport-google-oauth](http://passportjs.org/docs/google), por medio del cual se solicita al usuario el permiso de utilizar la aplicación **Subir Imágenes App**.
 
 En primer lugar se debe entrar a [Google Developers Console](https://accounts.google.com/signin/v2/identifier?service=cloudconsole&passive=1209600&osid=1&continue=https%3A%2F%2Fconsole.developers.google.com%2F%3Fref%3Dhttp%3A%2F%2Fpassportjs.org%2Fdocs%2Fgoogle&followup=https%3A%2F%2Fconsole.developers.google.com%2F%3Fref%3Dhttp%3A%2F%2Fpassportjs.org%2Fdocs%2Fgoogle&flowName=GlifWebSignIn&flowEntry=ServiceLogin) donde se debe **aceptar el consentimiento de OAuth**, **habilitar la API de Google+** y luego **crear una credencial** en la cual se deben establecer 2 cosas: 
 
