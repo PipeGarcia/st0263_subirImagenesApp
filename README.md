@@ -1,9 +1,11 @@
 # Subir Imagenes App
 Tópicos Especiales en Telemática
 
-Realizado por: Andrés Felipe García Granados
-               Cristian David Suaza Cárdenas
-               Stiven Andrés Hurtado Loaiza
+Realizado por:
+
+* Andrés Felipe García Granados
+* Cristian David Suaza Cárdenas
+* Stiven Andrés Hurtado Loaiza
 
 # Descripción de la aplicación
 
