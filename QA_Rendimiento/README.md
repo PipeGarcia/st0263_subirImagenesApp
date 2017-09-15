@@ -1,4 +1,4 @@
-# Mejora en Rendimiento
+# QA Rendimiento
 
 Para mejorar el rendimiento de la aplicación, se implementó **compresión de assets** y **cache**. Se realizaron pruebas por medio de la herramienta [JMeter](http://jmeter.apache.org/) para 2 escenarios en 3 momentos diferentes.
 
