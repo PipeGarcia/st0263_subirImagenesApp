@@ -12,6 +12,8 @@ La cache se implementó de la siguiente manera:
 
 Cuando un usuario consulta sus imágenes, se crea una cache con las imágenes que hay almacenadas para ese usuario en la base de datos. A partir de ese momento, la caché cuenta con un tiempo de vida de 1 minuto. Si el usuario sube más imágenes y las consulta antes de que termine el minuto, no las va a visualizar; luego de que pase el minuto, cuando el usuario vuelva a consultar sus imágenes, se vuelve a crear la caché con todas las imágenes subidas hasta el momento y por lo tanto, puede ver las nuevas imágenes. Por otro lado, si el usuario elimina una imagen, la cache se actualiza inmediatamente con las imágenes que se encuentran almacenadas para ese usuario en la base de datos.
 
+La adición de cache se realizó en **routes/images.js**
+
 * Cache en búsqueda de imágenes:
 
 ![](buscarEnCache1.PNG)
