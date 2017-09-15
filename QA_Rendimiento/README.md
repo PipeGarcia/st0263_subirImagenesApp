@@ -14,13 +14,13 @@ Cuando un usuario consulta sus imágenes, se crea una cache con las imágenes qu
 
 * Cache en búsqueda de imágenes:
 
-![](buscarEnCache.PNG)
+![](buscarEnCache1.PNG)
 
 Aquí podemos observar lo explicado anteriormente. En el momento en que el usuario consulta sus imágenes, se verifica si ya existe cache, de ser así el usuario observa las imágenes que ha subido hasta el momento, en caso contrario, se crea la cache con las imágenes que hayan en la base de datos para ese usuario.
 
 * Cache en eliminación de imágenes:
 
-![](eliminarDeCache.PNG)
+![](eliminarDeCache1.PNG)
 
 Cuando el usuario elimina una imágen, inmediatamente se actualiza la caché con las imágenes contenidas para ese usuario en la base de datos.
 
