@@ -90,8 +90,6 @@ passport.use(new GoogleStrategy({
   function(accessToken, refreshToken, profile, done) {
   		process.nextTick(function(){
 	       	User.getUserByUsername(profile.id, function (err, user) {
-	       		console.log('oe llegue aqui');
-	         	//return done(err, user);
 
 	        	if(err)
 					return done(err);
@@ -102,7 +100,6 @@ passport.use(new GoogleStrategy({
 							name: profile.displayName,
 							email: profile.emails[0].value,
 							username: profile.id
-							//password: ''
 						});
 
 
