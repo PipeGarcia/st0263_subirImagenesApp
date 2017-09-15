@@ -136,12 +136,19 @@ Se siguen las instrucciones de la siguiente página:
 - Se configuran los siguientes servicios
 
 	$ sudo systemctl enable rpcbind
+
 	$ sudo systemctl enable nfs-server
+
 	$ sudo systemctl enable nfs-lock
+
 	$ sudo systemctl enable nfs-idmap
+
 	$ sudo systemctl start rpcbind
+
 	$ sudo systemctl start nfs-server
+
 	$ sudo systemctl start nfs-lock
+
 	$ sudo systemctl start nfs-idmap
 
 - Se configura la carpeta que se va a compartir en la ruta /etc/exports y se agrega la línea
@@ -153,6 +160,7 @@ Se siguen las instrucciones de la siguiente página:
 - Se reinicia y se valida que el servicio nfs-server esté arriba
 
 	$ sudo systemctl restart nfs-server
+
 	$ sudo systemctl status nfs-server
 
 * Configuración de NFS Client
@@ -164,12 +172,19 @@ Se siguen las instrucciones de la siguiente página:
 - Se configuran los siguientes servicios
 
 	$ sudo systemctl enable rpcbind
+
 	$ sudo systemctl enable nfs-server
+
 	$ sudo systemctl enable nfs-lock
+
 	$ sudo systemctl enable nfs-idmap
+
 	$ sudo systemctl start rpcbind
+
 	$ sudo systemctl start nfs-server
+
 	$ sudo systemctl start nfs-lock
+
 	$ sudo systemctl start nfs-idmap
 
 - Se configura el archivo fstab para que el montaje de la carpeta se realice automáticamente, al momento de iniciar el sistema operativo
