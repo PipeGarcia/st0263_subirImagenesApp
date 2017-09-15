@@ -108,7 +108,7 @@ defaults
 
 	$ sudo systemctl start haproxy
 
-	$ sudo systemctl start haproxy
+	$ sudo systemctl status haproxy
 
 # NFS
 
